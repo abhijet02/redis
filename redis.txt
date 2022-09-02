@@ -1,0 +1,80 @@
+Install Redis:
+--------------
+--------------
+sudo yum install epel-release
+sudo yum install redis -y
+sudo systemctl start redis
+sudo systemctl status redis
+sudo systemctl enable redis
+redis-cli ping
+If Redis is running, it will return:
+PONG
+Congratulations! Redis is now installed and running!
+
+----------------------------
+----------------------------
+Clean redis:
+redis-cli flushall
+
+redis-cli -p 6380
+----------------------------
+----------------------------
+multiple Redis:
+
+Step One : Install Redis
+
+Refer this article Install Redis Standalone instance
+
+Now redis one is running successfully on port 6379
+
+Redis one status verify
+systemctl start redis
+systemctl status redis
+Step Two : Enable redis two instance
+
+----------------------
+
+
+
+There is no additional installation needed to enable another redis instance.
+
+   
+Please follow below steps
+
+Copy the redis.conf file to /etc/redis2.conf,  like below
+cp -r /etc/redis.conf /etc/redis2.conf
+
+Open the file using vim
+vim /etc/redis2.conf
+
+Update the below entries on the file.
+port 6378
+dir /var/lib/redis2
+
+
+Port listening status
+netstat -antlp | grep -i listen| grep :637
+tcp 0 0 127.0.0.1:6379 0.0.0.0:* LISTEN 20212/redis-server
+tcp 0 0 127.0.0.1:6378 0.0.0.0:* LISTEN 20336/redis-server
+Step Seven : Verify the status
+
+Using Redis-cli
+
+Instance one:
+redis-cli -h 127.0.0.1 -p 6379 ping
+  If Redis one is running, it will return:
+PONG
+Instance two:
+redis-cli -h 127.0.0.1 -p 6378 ping
+  If Redis two is running, it will return:
+PONG
+
+
+
+http://sysops.km2gd.com/how-to-run-multiple-redis-instance-on-centos-7-it-supports-centos-6-6-5/
+http://sysops.km2gd.com/how-to-install-redis-on-centos-7/
+
+
+AUTH 9941cc15f59e41cb7be6c52
+
+b840fc0
